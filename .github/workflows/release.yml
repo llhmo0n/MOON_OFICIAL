@@ -1,4 +1,4 @@
-name: Release Binarios
+name: Build MOON Binaries
 
 on:
   push:
@@ -13,9 +13,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - uses: rust-lang/rustup@v1
-      - run: cargo build --release --bin moon_full_node
-      - uses: actions/upload-artifact@v4
+
+      - name: Install Rust
+        uses: rust-lang/rustup@v1
         with:
-          name: moon-${{ matrix.os }}
+          toolchain: stable
+
+      - name: Build release
+        run: cargo build --release --bin moon_full_node
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: moon-${{ runner.os }}
           path: target/release/moon_full_node*
