@@ -1,41 +1,12 @@
-[workspace]
-members = [
-    "moon_cli",
-    "moon_full_node",
-    "moon_network",
-    "moon_p2p_test",
-    "moon_p2p",
-    "moon_p2p_test",
-    "moon_p2p",
-    "moon_node",
-    "moon_node",
-    "moon_core",
-    "moon_node",
-]
-resolver = "2"
+[package]
+name = "moon_local"
+version = "1.0.0"
+edition = "2021"
 
-[workspace.dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-sha2 = "0.10"
-thiserror = "1.0"
-log = "0.4"
-p256 = { version = "0.13", features = ["ecdsa"] }
-rand_core = { version = "0.6", features = ["std"] }
-hex = "0.4"
-num-bigint = "0.4"
-num-traits = "0.2"
-chrono = { version = "0.4", features = ["clock"] }
-rocksdb = "0.22"
-axum = "0.7"
-tokio = { version = "1.0", features = ["full"] }
-tower = "0.4"
-tower-http = { version = "0.5", features = ["cors"] }
-moon_network = { path = "moon_network" }
-moon_block_relay = { path = "moon_block_relay" }
-moon_wallet = { path = "moon_wallet" }
+[dependencies]
+moon_core = { path = "moon_core" }
+tokio = { version = "1", features = ["full"] }
 
-moon_utxo = { path = "moon_utxo" }
-moon_miner = { path = "moon_miner" }
-
-
+[[bin]]
+name = "moon_full_node"
+path = "moon_full_node/src/main.rs"

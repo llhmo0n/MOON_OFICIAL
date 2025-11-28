@@ -1,0 +1,8 @@
+[package]
+name = "moon_full_node"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+moon_core = { path = "../moon_core" }
+tokio = { version = "1.0", features = ["full"] }
