@@ -22,8 +22,18 @@ jobs:
       - name: Build
         run: cargo build --release --bin moon_full_node
 
+      - name: Rename binary
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            mv target/release/moon_full_node.exe moon-windows-x86_64.exe
+          elif [ "${{ runner.os }}" = "macOS" ]; then
+            mv target/release/moon_full_node moon-macos-x86_64
+          else
+            mv target/release/moon_full_node moon-linux-x86_64
+          fi
+
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
           name: moon-${{ runner.os }}
-          path: target/release/moon_full_node*
+          path: moon-*-x86_64*
