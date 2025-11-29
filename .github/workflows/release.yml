@@ -15,14 +15,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Rust
-        uses: rust-lang/rustup@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
 
-      - name: Build release
+      - name: Build
         run: cargo build --release --bin moon_full_node
 
-      - name: Upload binary
+      - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
           name: moon-${{ runner.os }}
